@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>Registration</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
+<body>
+  <p>
+    <b>Hey {{user.first_name}},</b>
+  </p>
+  <p>
+    <b>Thanks</b> for registration at our platform. Please verify your account by using following link:<br/>
+    <a href="{{baseurl}}{% url 'keysAccountActivationView' %}">{{baseurl}}{% url 'keysAccountActivationView' %}</a>
+  </p>
+  <p>
+    Kind regards,<br/>
+    Startup Fun Project Team
+  </p>
+</body>
+</html>
