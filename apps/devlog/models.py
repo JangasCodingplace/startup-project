@@ -33,6 +33,10 @@ class Version(models.Model):
         for v in versions:
             int(v)
 
+    @property
+    def patchcount(self):
+        return self.patches.count()
+
 
 class Patch(models.Model):
     key = models.CharField(
@@ -82,7 +86,7 @@ class Commit(models.Model):
         _("Timestamp"),
         auto_now_add=True
     )
-    path = models.ForeignKey(
+    patch = models.ForeignKey(
         Patch,
         on_delete=models.PROTECT,
         related_name="commits",
@@ -92,7 +96,8 @@ class Commit(models.Model):
         Version,
         on_delete=models.PROTECT,
         related_name="commits",
-        verbose_name=_("Version")
+        verbose_name=_("Version"),
+        editable=False
     )
 
     class Meta:
@@ -102,3 +107,7 @@ class Commit(models.Model):
 
     def __str__(self):
         return self.commit_url
+
+    def save(self, *args, **kwargs):
+        self.version = self.patch.version
+        super().save(*args, **kwargs)
