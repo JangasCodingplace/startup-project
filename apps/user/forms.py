@@ -1,7 +1,8 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth import authenticate
+from django.contrib.auth import authenticate, password_validation
 from django.core.exceptions import ValidationError
+from .models import User
 
 
 class AuthenticationForm(forms.Form):
@@ -39,3 +40,31 @@ class AuthenticationForm(forms.Form):
             self.error_messages['invalid_login'],
             code='invalid_login'
         )
+
+
+class RegistrationForm(forms.ModelForm):
+    password = forms.CharField(required=True)
+
+    error_messages = {
+        'password_mismatch': _('The two password fields didn’t match.'),
+    }
+
+    class Meta:
+        model = User
+        fields = ('email', 'first_name', 'last_name', )
+
+    def _post_clean(self):
+        super()._post_clean()
+        password = self.cleaned_data.get('password')
+        if password:
+            try:
+                password_validation.validate_password(password, self.instance)
+            except ValidationError as error:
+                self.add_error('password', error)
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.set_password(self.cleaned_data["password"])
+        if commit:
+            user.save()
+        return user
