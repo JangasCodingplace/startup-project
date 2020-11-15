@@ -18,6 +18,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', '165.227.162.162']
 sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 
 INSTALLED_APPS = [
+    'devlog.apps.DevlogConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
