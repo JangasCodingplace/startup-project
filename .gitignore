@@ -8,3 +8,4 @@ media/
 .idea/
 
 config/settings/local.py
+static/freelance-theme/index.html
