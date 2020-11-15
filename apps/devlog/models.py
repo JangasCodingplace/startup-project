@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext_lazy as _
 from assets.helper import generate_key
 
@@ -29,7 +30,7 @@ class Version(models.Model):
         """
         versions = self.version.split('.')
         if len(versions) != 3:
-            raise ValueError("Fromat needs to be MAJ.MIN.PATCH")
+            raise ValidationError("Fromat needs to be MAJ.MIN.PATCH")
         for v in versions:
             int(v)
 
