@@ -35,11 +35,24 @@ $('#signup-form').submit(function(e){
     url: "{% url 'userSignUpAPI' %}",
     data: data,
     dataType: "json",
-    success: function(data) {
-        console.log(data)
-    },
+    success: function(data) {},
     error: function() {
-        alert('error handling here');
+        alert('ERR By SUBMITTING signup');
+    }
+  });
+})
+
+$('#pwforgotten-form').submit(function(e){
+  e.preventDefault();
+  var data = $(this).serialize();
+  $.ajax({
+    type: "POST",
+    url: "{% url 'userKeysCreateKeyAPI' %}",
+    data: data,
+    dataType: "json",
+    success: function(data) {},
+    error: function() {
+        alert('ERR By SUBMITTING signup');
     }
   });
 })
