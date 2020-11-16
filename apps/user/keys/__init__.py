@@ -1,1 +1,3 @@
-default_app_config = 'key.apps.KeysConfig'
+from .models import *
+from .admin import *
+from .signals import *

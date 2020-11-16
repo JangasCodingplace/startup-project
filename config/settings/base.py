@@ -20,7 +20,6 @@ sys.path.insert(0, os.path.join(BASE_DIR, 'apps'))
 INSTALLED_APPS = [
     'devlog.apps.DevlogConfig',
     'user.apps.UserConfig',
-    'keys.apps.KeysConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
