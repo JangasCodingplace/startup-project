@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-  <title>Registration</title>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registration</title>
 </head>
 <body>
   <p>
@@ -11,7 +11,9 @@
   </p>
   <p>
     <b>Thanks</b> for registration at our platform. Please verify your account by using following link:<br/>
-    <a href="{{base_url}}{% url 'keysAccountActivationView' key.key %}">{{baseurl}}{% url 'keysAccountActivationView' key.key %}</a>
+    <a href="{{base_url}}{% url 'keysAccountActivationView' key.key %}">
+      {{base_url}}{% url 'keysAccountActivationView' key.key %}
+    </a>
   </p>
   <p>
     Kind regards,<br/>

@@ -9,6 +9,7 @@ class KeyView(View):
         key = get_object_or_404(Key, key=key_pk)
         if not key.is_valid:
             raise Http404("Key is expired.")
+        return key
 
     def activation(self, request, key):
         user = key.user

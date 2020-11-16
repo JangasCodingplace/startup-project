@@ -5,6 +5,7 @@ from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.core.mail import send_mail
 from django.template.loader import get_template
+from django.utils.html import strip_tags
 from .models import Key
 
 
@@ -32,8 +33,9 @@ class EmailThread(threading.Thread):
 
     def _send_mail(self):
         send_mail(
-            subject=self.subject, message=self.message,
-            from_email=self.sender_mail, recipient_list=self.key.user.email
+            subject=self.subject, message=strip_tags(self.message),
+            from_email=self.sender_mail, recipient_list=[self.key.user.email],
+            html_message=self.message
         )
 
     def run(self):
