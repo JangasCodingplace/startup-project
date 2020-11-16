@@ -33,5 +33,5 @@ class KeyView(View):
         return redirect("indexIndex")
 
 
-class PWForgottenView(PasswordChangeView):
+class ResetPWView(PasswordChangeView):
     form_class = SetPasswordForm
