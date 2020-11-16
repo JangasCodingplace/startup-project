@@ -1,13 +1,7 @@
 from django.http import Http404
-from django.contrib.auth.views import LoginView, PasswordChangeView
-from .forms import AuthenticationForm
+from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import SetPasswordForm
 from keys.views import BaseKeyView
-
-
-class SignInView(LoginView):
-    http_method_names = ["post", ]
-    form_class = AuthenticationForm
 
 
 class PasswordResetView(PasswordChangeView, BaseKeyView):
