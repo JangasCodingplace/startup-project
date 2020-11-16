@@ -1,6 +1,6 @@
 from django.http import Http404
 from django.contrib.auth.views import LoginView, PasswordChangeView
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import CreateView
 from .forms import AuthenticationForm, RegistrationForm, KeyForm
 from django.contrib.auth.forms import SetPasswordForm
 from keys.views import BaseKeyView

@@ -30,7 +30,7 @@ class AuthenticationForm(forms.Form):
         if email is not None and password:
             self.user = authenticate(self.request, email=email,
                                      password=password)
-            if self.user is None:
+            if self.user is None or self.user.is_activated_by_key:
                 raise self.get_invalid_login_error()
         return self.cleaned_data
 
