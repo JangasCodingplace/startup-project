@@ -7,11 +7,11 @@ urlpatterns = [
     path(
         'signin',
         views.SignInView.as_view(),
-        name="userSignInView"
+        name="userAuthSignInView"
     ),
     path(
         'logout',
         LogoutView.as_view(),
-        name="userLogoutView"
+        name="userAuthLogoutView"
     )
 ]

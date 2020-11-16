@@ -6,11 +6,11 @@ urlpatterns = [
     path(
         '<int:key_pk>',
         views.KeyView.as_view(),
-        name="KeyView"
+        name="userKeyKeyView"
     ),
     path(
         'create-key',
         ajax.CreateKeyAPI.as_view(),
-        name="userCreateKeyAPI"
+        name="userKeyCreateKeyAPI"
     ),
 ]
