@@ -3,6 +3,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.contrib.auth import login
 from .models import Key
 from django.views.generic import View
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.forms import SetPasswordForm
 
 
 class KeyView(View):
@@ -29,3 +31,7 @@ class KeyView(View):
         if key.function == "a":
             return self.activation(request, key)
         return redirect("indexIndex")
+
+
+class PWForgottenView(PasswordChangeView):
+    form_class = SetPasswordForm
