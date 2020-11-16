@@ -7,9 +7,9 @@
     </main>
     {% if not request.user.is_authenticated %}
     <div class="col-md-4 col-xl-4 bd-sidebar" id="auth-sidebar" style="display: none;">
-      {% include 'auth/signin.html' %}
-      {% include 'auth/signup.html' %}
-      {% include 'auth/passwordForgotten.html' %}
+      {% include 'user/auth/signin.html' %}
+      {% include 'user/user/signup.html' %}
+      {% include 'user/keys/passwordForgotten.html' %}
     </div>
    {% endif %} 
   </div>
@@ -20,7 +20,7 @@
 {{ block.super }}
 {% if not request.user.is_authenticated %}
 <script>
-  {% include "auth/auth.js" %}
+  {% include "user/auth.js" %}
 </script>
 {% endif %}
 {% endblock javascript %}
