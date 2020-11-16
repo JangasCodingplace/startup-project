@@ -47,10 +47,8 @@ class EmailThread(threading.Thread):
             self.set_subject_and_message_for_activation_mail()
         if self.key.function == "pw":
             self.set_subject_and_message_for_pw_forgotten_mail()
-            print("\n\nPW FORGOTTEN\n\n")
         if self.subject and self.message:
             self._send_mail()
-            print("\n\nMAIL SENDED\n\n")
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
