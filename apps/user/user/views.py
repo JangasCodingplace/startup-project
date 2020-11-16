@@ -11,11 +11,6 @@ class SignInView(LoginView):
     form_class = AuthenticationForm
 
 
-class SignUpView(CreateView):
-    form_class = RegistrationForm
-    success_url = "/"
-
-
 class CreateKeyView(CreateView):
     form_class = KeyForm
     success_url = "/"

@@ -1,8 +1,9 @@
 from rest_framework.views import APIView
+from rest_framework.generics import CreateAPIView
 from rest_framework import status
 from rest_framework.response import Response
 from .models import User
-from .serializers import UserIsTakenSerializer
+from .serializers import UserIsTakenSerializer, UserRegistrationSerializer
 
 
 class UserIsTakenAPI(APIView):
@@ -16,3 +17,8 @@ class UserIsTakenAPI(APIView):
         user_is_taken = self.get_queryset(email)
         return Response({'user_is_taken': user_is_taken},
                         status=status.HTTP_200_OK)
+
+
+class SignupAPI(CreateAPIView):
+    queryset = User.objects
+    serializer_class = UserRegistrationSerializer

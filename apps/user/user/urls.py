@@ -11,11 +11,6 @@ urlpatterns = [
         name="userSignInView"
     ),
     path(
-        'signup',
-        views.SignUpView.as_view(),
-        name="userSignUpView"
-    ),
-    path(
         'logout',
         LogoutView.as_view(),
         name="userLogoutView"
@@ -30,6 +25,11 @@ urlpatterns = [
         views.PasswordResetView.as_view(),
         name="userPasswordResetView"
     ).
+    path(
+        'signup',
+        ajax.SignupAPI.as_view(),
+        name="userSignUpAPI"
+    ),
     path(
         'user-is-taken',
         ajax.UserIsTakenView.as_view(),
