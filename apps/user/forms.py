@@ -2,6 +2,8 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import authenticate, password_validation
 from django.core.exceptions import ValidationError
+
+from keys.models import Key
 from .models import User
 
 
@@ -68,3 +70,22 @@ class RegistrationForm(forms.ModelForm):
         if commit:
             user.save()
         return user
+
+
+class KeyForm(forms.Form):
+    email = forms.EmailField()
+
+    def get_user(self, email):
+        try:
+            return User.objects.get(email=email)
+        except User.DoesNotExist:
+            return None
+
+    def create_key(self):
+        email = self.cleaned_data.get('email')
+        user = self.get_user(email=email)
+        if user is not None:
+            Key.objects.create(user=user)
+
+    def clean(self):
+        self.create_key()
