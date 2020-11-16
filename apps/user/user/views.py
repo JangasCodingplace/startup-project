@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.contrib.auth.views import PasswordChangeView
 from django.contrib.auth.forms import SetPasswordForm
-from keys.views import BaseKeyView
+from user.keys.views import BaseKeyView
 
 
 class PasswordResetView(PasswordChangeView, BaseKeyView):

@@ -16,7 +16,7 @@ urlpatterns = [
     ),
     path(
         'user-is-taken',
-        ajax.UserIsTakenView.as_view(),
+        ajax.UserIsTakenAPI.as_view(),
         name="userUserIsTakenAPI"
     )
 ]
