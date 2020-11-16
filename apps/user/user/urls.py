@@ -16,11 +16,6 @@ urlpatterns = [
         name="userLogoutView"
     ),
     path(
-        'create-key',
-        views.CreateKeyView.as_view(),
-        name="userCreateKeyView"
-    ),
-    path(
         'reset-pw/<int:key_pk>',
         views.PasswordResetView.as_view(),
         name="userPasswordResetView"

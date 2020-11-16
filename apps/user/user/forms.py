@@ -3,9 +3,6 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import authenticate
 from django.core.exceptions import ValidationError
 
-from keys.models import Key
-from .models import User
-
 
 class AuthenticationForm(forms.Form):
     email = forms.EmailField()
@@ -42,30 +39,3 @@ class AuthenticationForm(forms.Form):
             self.error_messages['invalid_login'],
             code='invalid_login'
         )
-
-
-class KeyForm(forms.Form):
-    email = forms.EmailField()
-
-    def __init__(self, request=None, instance=None, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.request = request
-        self.instance = instance
-
-    def get_user(self, email):
-        try:
-            return User.objects.get(email=email)
-        except User.DoesNotExist:
-            return None
-
-    def create_key(self):
-        email = self.cleaned_data.get('email')
-        self.user = self.get_user(email=email)
-
-    def clean(self):
-        self.create_key()
-
-    def save(self):
-        if self.user is not None:
-            self.instance = Key.objects.create(user=self.user)
-        return self.instance
