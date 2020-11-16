@@ -9,6 +9,7 @@ class KeyView(View):
     def get_key(self, key_pk):
         key = get_object_or_404(Key, key=key_pk)
         if not key.is_valid:
+            key.delete()
             raise Http404("Key is expired.")
         key.delete()
         return key
