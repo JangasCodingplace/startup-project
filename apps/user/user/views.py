@@ -6,7 +6,7 @@ from user.keys.views import BaseKeyView
 
 class PasswordResetView(PasswordChangeView, BaseKeyView):
     form_class = SetPasswordForm
-    template_name = 'user/resetPassword.html'
+    template_name = 'user/user/resetPassword.html'
     success_url = "/"
 
     def key_validation(self, request, key_pk):
