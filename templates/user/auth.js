@@ -20,10 +20,26 @@ $('a[name="pwforgotten-switch"]').click(function(){
   $( "#signin-form").hide();
   $("#pwforgotten-form").show();
 })
-
 $('h3[name="close-auth"]').click(function(){
   $( "#auth-sidebar").toggle("slow", function(){
     $('#main').removeClass(['col-md-8', 'col-xl-8']);
     $('#main').addClass(['col-md-12', 'col-xl-12']);
+  });
+})
+
+$('#signup-form').submit(function(e){
+  e.preventDefault();
+  var data = $(this).serialize();
+  $.ajax({
+    type: "POST",
+    url: "{% url 'userSignUpAPI' %}",
+    data: data,
+    dataType: "json",
+    success: function(data) {
+        console.log(data)
+    },
+    error: function() {
+        alert('error handling here');
+    }
   });
 })
