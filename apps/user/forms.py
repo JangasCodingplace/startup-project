@@ -75,6 +75,11 @@ class RegistrationForm(forms.ModelForm):
 class KeyForm(forms.Form):
     email = forms.EmailField()
 
+    def __init__(self, request=None, instance=None, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.request = request
+        self.instance = instance
+
     def get_user(self, email):
         try:
             return User.objects.get(email=email)
@@ -85,7 +90,7 @@ class KeyForm(forms.Form):
         email = self.cleaned_data.get('email')
         user = self.get_user(email=email)
         if user is not None:
-            Key.objects.create(user=user)
+            self.instance = Key.objects.create(user=user)
 
     def clean(self):
         self.create_key()
