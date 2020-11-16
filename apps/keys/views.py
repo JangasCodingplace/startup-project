@@ -1,37 +1,38 @@
-from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import redirect
 from django.contrib.auth import login
-from .models import Key
 from django.views.generic import View
-from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth.forms import SetPasswordForm
+from django.http import Http404
+from django.shortcuts import get_object_or_404
+from .models import Key
 
 
-class KeyView(View):
-    def get_key(self, key_pk):
+class BaseKeyView:
+    def authentication(self, request, user):
+        login(request, user)
+
+    def get_key_authentication(self, request, key_pk):
         key = get_object_or_404(Key, key=key_pk)
         if not key.is_valid:
             key.delete()
             raise Http404("Key is expired.")
-        key.delete()
+        self.authentication(request, key.user)
         return key
 
-    def authentication(self, request, user):
-        login(request, user)
 
-    def activation(self, request, key):
-        user = key.user
+class KeyView(View, BaseKeyView):
+
+    def activation(self, request):
+        user = request.user
         user.is_activated_by_key = True
         user.save()
-        self.authentication(request, user)
         return redirect("indexIndex")
 
     def get(self, request, key_pk, *args, **kwargs):
-        key = self.get_key(key_pk)
+        key = self.get_key_authentication(request=request, key_pk=key_pk)
         if key.function == "a":
-            return self.activation(request, key)
+            key.delete()
+            return self.activation(request)
+        if key.function == "pw":
+            return redirect("userPasswordResetView",
+                            **{'key_pk': key.key})
         return redirect("indexIndex")
-
-
-class ResetPWView(PasswordChangeView):
-    form_class = SetPasswordForm

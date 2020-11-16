@@ -88,9 +88,12 @@ class KeyForm(forms.Form):
 
     def create_key(self):
         email = self.cleaned_data.get('email')
-        user = self.get_user(email=email)
-        if user is not None:
-            self.instance = Key.objects.create(user=user)
+        self.user = self.get_user(email=email)
 
     def clean(self):
         self.create_key()
+
+    def save(self):
+        if self.user is not None:
+            self.instance = Key.objects.create(user=self.user)
+        return self.instance

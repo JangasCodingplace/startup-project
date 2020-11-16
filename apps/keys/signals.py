@@ -31,6 +31,10 @@ class EmailThread(threading.Thread):
         self.subject = "Thanks for registration!"
         self.message = self.get_message("email/activation.html")
 
+    def set_subject_and_message_for_pw_forgotten_mail(self):
+        self.subject = "Password forgotten"
+        self.message = self.get_message("email/passwordForgotten.html")
+
     def _send_mail(self):
         send_mail(
             subject=self.subject, message=strip_tags(self.message),
@@ -41,12 +45,21 @@ class EmailThread(threading.Thread):
     def run(self):
         if self.key.function == "a":
             self.set_subject_and_message_for_activation_mail()
+        if self.key.function == "pw":
+            self.set_subject_and_message_for_pw_forgotten_mail()
+            print("\n\nPW FORGOTTEN\n\n")
         if self.subject and self.message:
             self._send_mail()
+            print("\n\nMAIL SENDED\n\n")
 
 
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_key_by_registration(*args, **kwargs):
     if kwargs['created']:
-        key = Key.objects.create(user=kwargs['instance'])
-        EmailThread(key).start()
+        Key.objects.create(user=kwargs['instance'])
+
+
+@receiver(post_save, sender=Key)
+def send_key_via_mail(*args, **kwargs):
+    if kwargs['created']:
+        EmailThread(kwargs['instance']).start()

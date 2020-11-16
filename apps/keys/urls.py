@@ -6,6 +6,6 @@ urlpatterns = [
     path(
         '<int:key_pk>',
         views.KeyView.as_view(),
-        name="keysAccountActivationView"
+        name="KeyView"
     )
 ]
