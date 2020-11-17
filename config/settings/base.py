@@ -2,6 +2,7 @@ import os
 from pathlib import Path
 import sys
 from dotenv import load_dotenv
+from django.urls import reverse_lazy
 
 BASE_DIR = Path(__file__).resolve(strict=True).parent.parent.parent
 load_dotenv(os.path.join(BASE_DIR, '.env'))
@@ -113,3 +114,8 @@ EMAIL_HOST_USER = 'apikey'
 EMAIL_HOST_PASSWORD = SENDGRID_API_KEY
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
+
+
+LOGIN_URL = reverse_lazy('indexIndex')
+LOGIN_REDIRECT_URL = reverse_lazy('indexIndex')
+LOGOUT_REDIRECT_URL = reverse_lazy('indexIndex')
