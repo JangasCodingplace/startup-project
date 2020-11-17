@@ -76,3 +76,12 @@ $('#signup-email').blur(function(){
     $('#signup-email-warning').text('Please use a valid Email.');
   }
 })
+
+$('#pwforgotten-email').blur(function(){
+  if (validateEmail($(this).val())){
+    $('#pwforgotten-email-warning').text('');
+  }
+  else {
+    $('#pwforgotten-email-warning').text('Please use a valid Email.');
+  }
+})
