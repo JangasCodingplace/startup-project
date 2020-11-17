@@ -35,7 +35,11 @@ $('#signup-form').submit(function(e){
     url: "{% url 'userSignUpAPI' %}",
     data: data,
     dataType: "json",
-    success: function(data) {},
+    success: function(data) {
+      $("#new-registrated-user").val(data.email);
+      $("#signup-form").hide();
+      $("#successfull-signup").show();
+    },
     error: function() {
         alert('ERR By SUBMITTING signup');
     }
@@ -45,6 +49,20 @@ $('#signup-form').submit(function(e){
 $('#pwforgotten-form').submit(function(e){
   e.preventDefault();
   var data = $(this).serialize();
+  $.ajax({
+    type: "POST",
+    url: "{% url 'userKeysCreateKeyAPI' %}",
+    data: data,
+    dataType: "json",
+    success: function(data) {},
+    error: function() {
+        alert('ERR By SUBMITTING signup');
+    }
+  });
+})
+
+$('#resend-activation').click(function(){
+  var data = $('#resend-key-form').serialize();
   $.ajax({
     type: "POST",
     url: "{% url 'userKeysCreateKeyAPI' %}",

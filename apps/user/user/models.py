@@ -112,7 +112,7 @@ class User(AbstractBaseUser):
         user_arg_count = users.count()
         if user_arg_count > 1:
             newest_user = users.order_by('url_arg').last()
-            new_index = int(newest_user.url_arg.split['-'][-1])
+            new_index = int(newest_user.url_arg.split('-')[-1])
             self.url_arg = f"{url_arg}-{new_index + 1}"
         elif user_arg_count > 0:
             self.url_arg = f"{url_arg}-2"
