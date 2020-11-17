@@ -1,4 +1,4 @@
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.contrib.auth import login
 from django.views.generic import View
 from django.http import Http404
@@ -25,7 +25,7 @@ class KeyView(View, BaseKeyView):
         user = request.user
         user.is_activated_by_key = True
         user.save()
-        return redirect("indexIndex")
+        return render(request, 'user/user/initialDataInput.html')
 
     def get(self, request, key_pk, *args, **kwargs):
         key = self.get_key_authentication(request=request, key_pk=key_pk)

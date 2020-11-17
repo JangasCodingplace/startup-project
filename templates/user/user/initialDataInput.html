@@ -1,0 +1,32 @@
+{% extends 'base/index.html' %}
+{% block content %}
+<div class="container-fluid">
+  <div class="row flex-xl-nowrap">
+    <main class="col-md-12 col-xl-12 py-md-3 pl-md-5 bd-content" role="main" id="main">
+      <form class="my-2" id="signup-form" method="post" action="#">
+        {% csrf_token %}
+        <div class="d-flex justify-content-center">
+          <h3>Your Account has been activated.</h3>
+        </div>
+        <small>
+          Please give us some brief information to improve the user experience on the platform or skip that and do it later.</small>
+        <hr>
+        <div class="form-group">
+          <label for="skills">Skills</label>
+          <input type="text" class="form-control" id="skills">
+        </div>
+        <div class="form-group">
+          <label for="about-you">About You</label>
+          <textarea class="form-control" id="about-you" rows="3"></textarea>
+        </div>
+        <button class="btn btn-primary w-100">Save</button>
+      </form>
+    </main>
+  </div>
+</div>
+{% endblock content%}
+
+{% block javascript %}
+{{ block.super }}
+
+{% endblock javascript %}
