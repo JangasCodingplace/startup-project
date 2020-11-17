@@ -19,6 +19,8 @@
 {% block javascript %}
 {{ block.super }}
 {% if not request.user.is_authenticated %}
+{% load static %}
+<script type="text/javascript" src="{% static 'customJs/emailValidation.js' %}"></script>
 <script>
   {% include "user/auth.js" %}
 </script>

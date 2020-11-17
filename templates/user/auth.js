@@ -56,3 +56,23 @@ $('#pwforgotten-form').submit(function(e){
     }
   });
 })
+
+$('#signup-email').blur(function(){
+  if (validateEmail($(this).val())){
+    var url = `{% url 'userUserIsTakenAPI' %}?email=${$(this).val()}`
+    $.ajax({
+      type: "GET",
+      url: url,
+      success: function(data) {
+        if (data.user_is_taken) $('#signup-email-warning').text('Email is already taken.');
+        else $('#signup-email-warning').text('');
+      },
+      error: function() {
+          alert('ERR By SUBMITTING RETRIEVE USER');
+      }
+    });
+  }
+  else {
+    $('#signup-email-warning').text('Please use a valid Email.');
+  }
+})
