@@ -54,7 +54,10 @@ $('#pwforgotten-form').submit(function(e){
     url: "{% url 'userKeysCreateKeyAPI' %}",
     data: data,
     dataType: "json",
-    success: function(data) {},
+    success: function(data) {
+      $('#pw-reset-sended').show()
+      $('#pwforgotten-form').hide()
+    },
     error: function() {
         alert('ERR By SUBMITTING signup');
     }
